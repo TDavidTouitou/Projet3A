@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         //Le contenu de la vue activity_main.xml sera celui sur lequels sera appliquer les prochaines lignes
         setContentView(R.layout.activity_main);
 
-        showList();
         makeApiCall();
     }
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /*Afficher la recycleView*/
-    private void showList(){
+    private void showList(List<Pokemon> pokemonList){
 
         //On récupère la recycleView du fichier activity_main
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -46,13 +45,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        //Créer une fausse liste de String
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            input.add("Test" + i);
-        }
         //Défini un adapter
-        ListAdapter myAdapter = new ListAdapter(input);
+        ListAdapter myAdapter = new ListAdapter(pokemonList);
         recyclerView.setAdapter(myAdapter);
     }
 
@@ -84,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(response.isSuccessful() && response.body() != null){
                     List<Pokemon> pokemonList = response.body().getResults();
-                    Toast.makeText(getApplicationContext(), "API Success!", Toast.LENGTH_SHORT).show();
-
+                    showList(pokemonList);
                 }
                 else{
                     showError();
