@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,13 +25,40 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Le contenu de la vue activity_main.xml sera celui sur lequels sera appliquer les prochaines lignes
         setContentView(R.layout.activity_main);
 
-        makeApiCall();
+        //Créer un objet qui permet de garder en mémoire les données (utiles pour ne pas avoir une application vide par manque de connexion)
+        sharedPreferences = getSharedPreferences(Constants.APPLICATION_NAME, Context.MODE_PRIVATE);
+        gson = new GsonBuilder().setLenient().create();
+
+        List<Pokemon> pokemonList = getDataFromCache();
+        if(pokemonList != null){
+            showList(pokemonList);
+        }
+        else{
+            makeApiCall();
+        }
+    }
+
+    //Permet de charger les données depuis le cache
+    private List<Pokemon> getDataFromCache(){
+
+        String jsonPokemon = sharedPreferences.getString(Constants.KEY_POKEMON_LIST, null);
+
+        if(jsonPokemon == null){
+            return null;
+        }
+        else{
+            Type listType = new TypeToken<List<Pokemon>>(){}.getType();
+            return gson.fromJson(jsonPokemon,listType);
+        }
     }
 
 
@@ -78,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(response.isSuccessful() && response.body() != null){
                     List<Pokemon> pokemonList = response.body().getResults();
+                    saveList(pokemonList);
                     showList(pokemonList);
                 }
                 else{
@@ -92,6 +123,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void saveList(List<Pokemon> pokemonList) {
+        String jsonString = gson.toJson(pokemonList);
+
+        sharedPreferences.edit()
+                .putString(Constants.KEY_POKEMON_LIST, jsonString)
+                .apply();
+        Toast.makeText(getApplicationContext(), "List saved!", Toast.LENGTH_SHORT).show();
+    }
     private void showError(){
 
         Toast.makeText(getApplicationContext(), "API Error!", Toast.LENGTH_SHORT).show();
