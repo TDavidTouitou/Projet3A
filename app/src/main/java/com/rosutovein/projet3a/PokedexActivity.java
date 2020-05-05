@@ -37,7 +37,7 @@ public class PokedexActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Le contenu de la vue activity_main.xml sera celui sur lequels sera appliquer les prochaines lignes
+        //Le contenu de la vue activity_main.xml sera celui sur lequels sera appliqué les prochaines lignes
         setContentView(R.layout.activity_pokedex);
 
         //Ajouter la toolbar sur l'activité
