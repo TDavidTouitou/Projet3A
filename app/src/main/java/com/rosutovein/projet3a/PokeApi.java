@@ -5,9 +5,9 @@ import retrofit2.http.GET;
 
 public interface PokeApi {
 
-    @GET("/api/v2/pokemon")
+    @GET("api/v2/pokemon?limit=807")
     Call<RestPokemonResponse> getPokemonResponse();
 
-    //@GET("/api/v2/ability")
-    //Call<RestPokemonResponse> getPokemonAbility();
+    @GET("https://raw.githubusercontent.com/PokeAPI")
+    Call<RestPokemonSpritesResponse> getPokemonSpritesResponse();
 }

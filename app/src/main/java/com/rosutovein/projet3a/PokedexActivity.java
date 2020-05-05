@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -38,8 +40,8 @@ public class PokedexActivity extends AppCompatActivity{
         //Le contenu de la vue activity_main.xml sera celui sur lequels sera appliquer les prochaines lignes
         setContentView(R.layout.activity_pokedex);
 
+        //Ajouter la toolbar sur l'activité
         Toolbar pokedexToolbar = (Toolbar) findViewById(R.id.toolbar);
-        Toolbar pokedexToolbadr = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(pokedexToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -50,12 +52,22 @@ public class PokedexActivity extends AppCompatActivity{
         gson = new GsonBuilder().setLenient().create();
 
         List<Pokemon> pokemonList = getDataFromCache();
-        if(pokemonList != null){
+        if(pokemonList != null && !haveInternetConnection()){
             showList(pokemonList);
         }
         else{
             makeApiCall();
         }
+    }
+
+    private boolean haveInternetConnection(){
+
+        NetworkInfo network = ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+
+        if(network == null || !network.isConnected()) {
+            return false;
+        }
+        return true;
     }
 
     //Permet de charger les données depuis le cache
@@ -95,7 +107,9 @@ public class PokedexActivity extends AppCompatActivity{
 
 
     /*Appeler l'API pokeapi*/
+    //int token = 1;
     private static final String BASE_URL = "https://pokeapi.co/";
+    private static final String SPRITES_BASE_URL = "https://www.pokebip.com/pokedex/images/sugimori/";
     private void makeApiCall(){
 
         Gson gson = new GsonBuilder()
@@ -119,6 +133,11 @@ public class PokedexActivity extends AppCompatActivity{
 
                 if(response.isSuccessful() && response.body() != null){
                     List<Pokemon> pokemonList = response.body().getResults();
+                    int currentPokemon = 0;
+                    for(int i = 1; i < pokemonList.size()+1; i++){
+                        pokemonList.get(currentPokemon).setSprite(SPRITES_BASE_URL+ i + ".png");
+                        currentPokemon++;
+                    }
                     saveList(pokemonList);
                     showList(pokemonList);
                 }
