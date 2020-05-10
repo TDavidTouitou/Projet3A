@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.http.GET;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -18,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.ActionBar;
@@ -33,6 +36,8 @@ public class PokedexActivity extends AppCompatActivity{
 
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private List<Pokemon>pokemonList;
+    private List<PokemonInformations> pokemonInformationsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,7 @@ public class PokedexActivity extends AppCompatActivity{
         sharedPreferences = getSharedPreferences(Constants.APPLICATION_NAME, Context.MODE_PRIVATE);
         gson = new GsonBuilder().setLenient().create();
 
-        List<Pokemon> pokemonList = getDataFromCache();
+        pokemonList = getDataFromCache();
         if(pokemonList != null && !haveInternetConnection()){
             showList(pokemonList);
         }
@@ -122,8 +127,10 @@ public class PokedexActivity extends AppCompatActivity{
                 .build();
 
         PokeApi pokeApi = retrofit.create(PokeApi.class);
+        PokeApi pokeApi2 = retrofit.create(PokeApi.class);
 
         Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+
         //On créer un callback qui va "diagnostiquer" la réponse du serveur.
         //On créer deux méthode, une en cas de réponse du serveur et ...
         //... une en cas d'absence de réponse.
@@ -132,9 +139,11 @@ public class PokedexActivity extends AppCompatActivity{
             public void onResponse(@NonNull Call<RestPokemonResponse> call, @NonNull Response<RestPokemonResponse> response) {
 
                 if(response.isSuccessful() && response.body() != null){
-                    List<Pokemon> pokemonList = response.body().getResults();
+                    pokemonList = response.body().getResults();
+
                     int currentPokemon = 0;
                     for(int i = 1; i < pokemonList.size()+1; i++){
+                        pokemonList.get(currentPokemon).setId(i);
                         pokemonList.get(currentPokemon).setSprite(SPRITES_BASE_URL+ i + ".png");
                         currentPokemon++;
                     }
@@ -151,6 +160,34 @@ public class PokedexActivity extends AppCompatActivity{
                 showError();
             }
         });
+
+
+        //for(int i = 1; i < 806; i++) {
+        Call<RestPokemonInformations>call2 = pokeApi2.getPokemonInformationsResponse(1);
+            call2.enqueue(new Callback<RestPokemonInformations>() {
+                @Override
+                public void onResponse(@NonNull Call<RestPokemonInformations> call2, @NonNull Response<RestPokemonInformations> response) {
+
+                    if (response.isSuccessful() && response.body() != null) {
+
+                        /*On récupère le poids, la taille, les deux types*/
+                        Integer newWeight = response.body().getWeight();
+                        Integer newHeight  = response.body().getHeight();
+                        pokemonInformationsList = response.body().getInformationsResults();
+
+                        /*On les associe au pokemon correspondant*/
+                        pokemonList.get(0).setPokemonInformations(pokemonInformationsList);
+                        pokemonList.get(0).setHeight(newHeight);
+                        pokemonList.get(0).setWeight(newWeight);
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<RestPokemonInformations> call2, @NonNull Throwable t) {
+                    Log.i("Fail", "it doesn't works working!");
+                }
+            });
+        //}
     }
 
     private void saveList(List<Pokemon> pokemonList) {
