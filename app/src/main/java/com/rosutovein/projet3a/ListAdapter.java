@@ -70,15 +70,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         final Pokemon currentPokemon = values.get(position);
-       if(currentPokemon.getId() < 10)
-            holder.pokeId.setText("#00"+currentPokemon.getId());
-        else if(currentPokemon.getId() < 100)
-            holder.pokeId.setText("#0"+currentPokemon.getId());
-        else if(currentPokemon.getId() < 1000)
-            holder.pokeId.setText("#"+currentPokemon.getId());
+        holder.pokeId.setText(currentPokemon.getId());
         holder.txtHeader.setText(currentPokemon.getName());
-        holder.txtFooter.setText(currentPokemon.getUrl());
-        Picasso.get().load(currentPokemon.getSprite()).into(holder.imageHeader);
+        if(currentPokemon.getType().size() == 2){
+            holder.txtFooter.setText(currentPokemon.getType().get(0) + "    " + currentPokemon.getType().get(1));
+        }
+        else{
+            holder.txtFooter.setText(currentPokemon.getType().get(0));
+        }
+        Picasso.get().load(currentPokemon.getArtwork()).into(holder.imageHeader);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

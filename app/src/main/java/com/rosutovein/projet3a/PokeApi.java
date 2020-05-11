@@ -8,9 +8,6 @@ import retrofit2.http.Path;
 
 public interface PokeApi {
 
-    @GET("api/v2/pokemon?limit=807")
+    @GET("Rosutovein/Projet3A/master/pokedex.json")
     Call<RestPokemonResponse> getPokemonResponse();
-
-    @GET("api/v2/pokemon/{pokeId}")
-    Call<RestPokemonInformations> getPokemonInformationsResponse(@Path("pokeId") Integer pokeId);
 }
