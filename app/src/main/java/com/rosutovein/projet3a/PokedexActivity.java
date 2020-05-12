@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,8 @@ public class PokedexActivity extends AppCompatActivity{
     private SharedPreferences sharedPreferences;
     private Gson gson;
     private List<Pokemon>pokemonList;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
 
     @Override
@@ -53,6 +56,22 @@ public class PokedexActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //Ajouter le swipeRefresh sur l'activité
+        swipeRefreshLayout  = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(haveInternetConnection()){
+                    makeApiCall();
+                    saveList(pokemonList);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Connection failed!", Toast.LENGTH_SHORT).show();
+                }
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         //Créer un objet qui permet de garder en mémoire les données (utiles pour ne pas avoir une application vide par manque de connexion)
         sharedPreferences = getSharedPreferences(Constants.APPLICATION_NAME, Context.MODE_PRIVATE);
