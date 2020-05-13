@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">PokeAPI</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_type">Type1</string>
+    <string name="second_type">Type2</string>
+    <string name="height">Height</string>
+    <string name="Weight">Weight</string>
+    <string name="stat_pv">PV:</string>
+    <string name="stat_att">ATT:</string>
+    <string name="stat_def">DEF:</string>
+    <string name="stat_att_spe">ATT SPE:</string>
+    <string name="stat_def_spe">DEF SPE:</string>
+    <string name="stat_vit">VIT:</string>
+    <string name="Hidden_Ability">Hidden Ability</string>
+    <string name="ability">Ability</string>
+    <string name="ability_description">Ability description</string>
+    <string name="Hidden_Ability_Description">Hidden hability description</string>
 </resources>

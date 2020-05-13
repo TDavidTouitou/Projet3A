@@ -1,20 +1,27 @@
 package com.rosutovein.projet3a;
-
+import android.content.Intent;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Serializable {
     private List<Pokemon> values;
 
     // Provide a reference to the views for each data item
@@ -79,6 +86,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             holder.txtFooter.setText(currentPokemon.getType().get(0));
         }
         Picasso.get().load(currentPokemon.getArtwork()).into(holder.imageHeader);
+        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToPokemonActivity = new Intent(v.getContext(), PokemonActivity.class);
+                goToPokemonActivity.putExtra("pokemon", currentPokemon);
+                v.getContext().startActivity(goToPokemonActivity);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

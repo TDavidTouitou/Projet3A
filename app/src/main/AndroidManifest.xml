@@ -25,8 +25,12 @@
         <activity android:name=".MainActivity" android:parentActivityName=".MainActivity" android:label="@string/app_name"/>
         <activity android:name=".PokedexActivity" android:parentActivityName=".MainActivity" android:label="Pokedex"/>
         <activity android:name=".ToolbarActivity"/>
+        <activity android:name=".PokemonActivity" android:parentActivityName=".PokedexActivity" android:label="Pokemon"/>
         <activity android:name=".AboutActivity" android:parentActivityName=".MainActivity" android:label="About me"/>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
     </application>

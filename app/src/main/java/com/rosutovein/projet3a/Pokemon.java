@@ -1,8 +1,12 @@
 package com.rosutovein.projet3a;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Pokemon {
+public class Pokemon implements Parcelable {
 
     private String id;
     private String name;
@@ -17,14 +21,83 @@ public class Pokemon {
     private String hiddenabilitydescription;
     private List<String> weakness;
     private List<String> resistance;
-    private String statpv;
-    private String statatt;
-    private String statdef;
-    private String statattspe;
-    private String statdefspe;
-    private String statvit;
+    private int statpv;
+    private int statatt;
+    private int statdef;
+    private int statattspe;
+    private int statdefspe;
+    private int statvit;
     private String artwork;
     private String sprite;
+
+    public Pokemon(){
+
+    }
+
+    public Pokemon(String id, String name, List<String> type, String height, String weight, String abilityname, String secondabilityname, String abilitydescription,
+                   String secondabilitydescription, String hiddenabilityname, String hiddenabilitydescription, List<String> weakness, List<String> resistance, int statpv,
+                   int statatt, int statdef, int statattspe, int statdefspe, int statvit, String artwork, String sprite){
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.height = height;
+        this.weight = weight;
+        this.abilityname = abilityname;
+        this.secondabilityname = secondabilityname;
+        this.abilitydescription = abilitydescription;
+        this.secondabilitydescription = secondabilitydescription;
+        this.hiddenabilityname = hiddenabilityname;
+        this.hiddenabilitydescription = hiddenabilitydescription;
+        this.weakness = weakness;
+        this.resistance = resistance;
+        this.statpv = statpv;
+        this.statatt = statatt;
+        this.statdef = statdef;
+        this.statattspe = statattspe;
+        this.statdefspe = statdefspe;
+        this.statvit = statvit;
+        this.artwork = artwork;
+        this.sprite = sprite;
+    }
+
+    protected Pokemon(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        this.type = new ArrayList<String>();
+        in.readList(this.type, String.class.getClassLoader());
+        height = in.readString();
+        weight = in.readString();
+        abilityname = in.readString();
+        secondabilityname = in.readString();
+        abilitydescription = in.readString();
+        secondabilitydescription = in.readString();
+        hiddenabilityname = in.readString();
+        hiddenabilitydescription = in.readString();
+        this.weakness = new ArrayList<String>();
+        in.readList(this.weakness, String.class.getClassLoader());
+        this.resistance = new ArrayList<String>();
+        in.readList(this.resistance, String.class.getClassLoader());
+        statpv = in.readInt();
+        statatt = in.readInt();
+        statdef = in.readInt();
+        statattspe = in.readInt();
+        statdefspe = in.readInt();
+        statvit = in.readInt();
+        artwork = in.readString();
+        sprite = in.readString();
+    }
+
+    public static final Creator<Pokemon> CREATOR = new Creator<Pokemon>() {
+        @Override
+        public Pokemon createFromParcel(Parcel in) {
+            return new Pokemon(in);
+        }
+
+        @Override
+        public Pokemon[] newArray(int size) {
+            return new Pokemon[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -78,27 +151,27 @@ public class Pokemon {
         return resistance;
     }
 
-    public String getStatpv() {
+    public int getStatpv() {
         return statpv;
     }
 
-    public String getStatatt() {
+    public int getStatatt() {
         return statatt;
     }
 
-    public String getStatdef() {
+    public int getStatdef() {
         return statdef;
     }
 
-    public String getStatattspe() {
+    public int getStatattspe() {
         return statattspe;
     }
 
-    public String getStatdefspe() {
+    public int getStatdefspe() {
         return statdefspe;
     }
 
-    public String getStatvit() {
+    public int getStatvit() {
         return statvit;
     }
 
@@ -162,27 +235,27 @@ public class Pokemon {
         this.resistance = resistance;
     }
 
-    public void setStatpv(String statpv) {
+    public void setStatpv(int statpv) {
         this.statpv = statpv;
     }
 
-    public void setStatatt(String statatt) {
+    public void setStatatt(int statatt) {
         this.statatt = statatt;
     }
 
-    public void setStatdef(String statdef) {
+    public void setStatdef(int statdef) {
         this.statdef = statdef;
     }
 
-    public void setStatattspe(String statattspe) {
+    public void setStatattspe(int statattspe) {
         this.statattspe = statattspe;
     }
 
-    public void setStatdefspe(String statdefspe) {
+    public void setStatdefspe(int statdefspe) {
         this.statdefspe = statdefspe;
     }
 
-    public void setStatvit(String statvit) {
+    public void setStatvit(int statvit) {
         this.statvit = statvit;
     }
 
@@ -192,5 +265,36 @@ public class Pokemon {
 
     public void setSprite(String sprite) {
         this.sprite = sprite;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeList(type);
+        parcel.writeString(height);
+        parcel.writeString(weight);
+        parcel.writeString(abilityname);
+        parcel.writeString(secondabilityname);
+        parcel.writeString(abilitydescription);
+        parcel.writeString(secondabilitydescription);
+        parcel.writeString(hiddenabilityname);
+        parcel.writeString(hiddenabilitydescription);
+        parcel.writeList(weakness);
+        parcel.writeList(resistance);
+        parcel.writeInt(statpv);
+        parcel.writeInt(statatt);
+        parcel.writeInt(statdef);
+        parcel.writeInt(statattspe);
+        parcel.writeInt(statdefspe);
+        parcel.writeInt(statvit);
+        parcel.writeString(artwork);
+        parcel.writeString(sprite);
     }
 }

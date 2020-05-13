@@ -78,7 +78,7 @@ public class PokedexActivity extends AppCompatActivity{
         gson = new GsonBuilder().setLenient().create();
 
         pokemonList = getDataFromCache();
-        if(pokemonList != null && !haveInternetConnection()){
+        if(pokemonList != null || !haveInternetConnection()){
             showList(pokemonList);
         }
         else{
