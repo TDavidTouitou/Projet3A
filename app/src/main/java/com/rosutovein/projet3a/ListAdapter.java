@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,51 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Serializable, Filterable {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Serializable {
     private List<Pokemon> values;
-    private List<Pokemon> researchValues;
-
-    //Contructeur
-    ListAdapter(List<Pokemon> myDataset) {
-        values = myDataset;
-        researchValues = new ArrayList<>(values);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return pokemonListFilter;
-    }
-
-    private Filter pokemonListFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Pokemon> filteredList = new ArrayList<>();
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(researchValues);
-            }
-            else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for(Pokemon currentPokemon : researchValues){
-                    if(currentPokemon.getName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(currentPokemon);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            values.clear();
-            values.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -96,6 +53,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);
+    }
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    ListAdapter(List<Pokemon> myDataset) {
+        values = myDataset;
     }
 
     // Create new views
