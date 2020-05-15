@@ -2,6 +2,7 @@ package com.rosutovein.projet3a;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.http.GET;
@@ -13,6 +14,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ public class PokedexActivity extends AppCompatActivity{
     private Gson gson;
     private List<Pokemon>pokemonList;
     private SwipeRefreshLayout swipeRefreshLayout;
+    ListAdapter myAdapter;
 
 
 
@@ -86,6 +91,27 @@ public class PokedexActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_pokedex, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
     private boolean haveInternetConnection(){
 
         NetworkInfo network = ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
@@ -125,7 +151,7 @@ public class PokedexActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
 
         //Défini un adapter
-        ListAdapter myAdapter = new ListAdapter(pokemonList);
+        myAdapter = new ListAdapter(pokemonList);
         recyclerView.setAdapter(myAdapter);
     }
 
