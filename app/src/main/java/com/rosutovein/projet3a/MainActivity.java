@@ -3,6 +3,7 @@ package com.rosutovein.projet3a;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -47,6 +48,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         int id = item.getItemId();
+
+        if(id == R.id.action_open_in_bowser){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Rosutovein/Projet3A"));
+            startActivity(intent);
+            return true;
+        }
+
+        if(id == R.id.action_share){
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, "https://github.com/Rosutovein/Projet3A");
+            startActivity(Intent.createChooser(intent, "Share Github!"));
+            return true;
+        }
 
         if(id == R.id.action_about){
             Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);

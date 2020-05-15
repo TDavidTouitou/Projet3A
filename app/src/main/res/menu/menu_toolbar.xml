@@ -7,8 +7,14 @@
         android:title="About"/>
 
     <item
-        android:id="@+id/action_favorite"
-        android:title="Favorite"
+        android:id="@+id/action_open_in_bowser"
+        android:title="Open in bowser"
         app:showAsAction="always"
-        android:icon="@drawable/ic_favorite"/>
+        android:icon="@drawable/ic_open_in_bowser"/>
+
+    <item
+        android:id="@+id/action_share"
+        android:title="Share"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_share"/>
 </menu>

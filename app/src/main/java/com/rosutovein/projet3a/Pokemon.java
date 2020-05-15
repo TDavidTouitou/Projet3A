@@ -30,37 +30,8 @@ public class Pokemon implements Parcelable {
     private String artwork;
     private String sprite;
 
-    public Pokemon(){
 
-    }
-
-    public Pokemon(String id, String name, List<String> type, String height, String weight, String abilityname, String secondabilityname, String abilitydescription,
-                   String secondabilitydescription, String hiddenabilityname, String hiddenabilitydescription, List<String> weakness, List<String> resistance, int statpv,
-                   int statatt, int statdef, int statattspe, int statdefspe, int statvit, String artwork, String sprite){
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.height = height;
-        this.weight = weight;
-        this.abilityname = abilityname;
-        this.secondabilityname = secondabilityname;
-        this.abilitydescription = abilitydescription;
-        this.secondabilitydescription = secondabilitydescription;
-        this.hiddenabilityname = hiddenabilityname;
-        this.hiddenabilitydescription = hiddenabilitydescription;
-        this.weakness = weakness;
-        this.resistance = resistance;
-        this.statpv = statpv;
-        this.statatt = statatt;
-        this.statdef = statdef;
-        this.statattspe = statattspe;
-        this.statdefspe = statdefspe;
-        this.statvit = statvit;
-        this.artwork = artwork;
-        this.sprite = sprite;
-    }
-
-    protected Pokemon(Parcel in) {
+    private Pokemon(Parcel in) {
         id = in.readString();
         name = in.readString();
         this.type = new ArrayList<String>();

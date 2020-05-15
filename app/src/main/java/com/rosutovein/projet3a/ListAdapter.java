@@ -82,16 +82,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         }
     }
 
-    public void add(int position, Pokemon item) {
-        pokemonList.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    private void remove(int position) {
-        pokemonList.remove(position);
-        notifyItemRemoved(position);
-    }
-
     // Provide a suitable constructor (depends on the kind of dataset)
     ListAdapter(List<Pokemon> pokemonList) {
 
