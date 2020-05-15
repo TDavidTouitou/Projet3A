@@ -2,6 +2,7 @@ package com.rosutovein.projet3a;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.http.GET;
@@ -13,6 +14,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.ActionBar;
@@ -41,6 +46,7 @@ public class PokedexActivity extends AppCompatActivity{
     private Gson gson;
     private List<Pokemon>pokemonList;
     private SwipeRefreshLayout swipeRefreshLayout;
+    ListAdapter myAdapter;
 
 
 
@@ -51,7 +57,7 @@ public class PokedexActivity extends AppCompatActivity{
         setContentView(R.layout.activity_pokedex);
 
         //Ajouter la toolbar sur l'activité
-        Toolbar pokedexToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar pokedexToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(pokedexToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -86,14 +92,33 @@ public class PokedexActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_pokedex, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
     private boolean haveInternetConnection(){
 
-        NetworkInfo network = ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        NetworkInfo network = ((ConnectivityManager) Objects.requireNonNull(getSystemService(Context.CONNECTIVITY_SERVICE))).getActiveNetworkInfo();
 
-        if(network == null || !network.isConnected()) {
-            return false;
-        }
-        return true;
+        return network != null && network.isConnected();
     }
 
     //Permet de charger les données depuis le cache
@@ -109,7 +134,7 @@ public class PokedexActivity extends AppCompatActivity{
             return gson.fromJson(jsonPokemon,listType);
         }
     }
-
+     //
 
 
 
@@ -117,7 +142,7 @@ public class PokedexActivity extends AppCompatActivity{
     private void showList(List<Pokemon> pokemonList){
 
         //On récupère la recycleView du fichier activity_main
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         //Option permettant d'améliorer les performances
         recyclerView.setHasFixedSize(true);
         //On choisit un disposition linéaire pour notre recycleView
@@ -125,7 +150,7 @@ public class PokedexActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(layoutManager);
 
         //Défini un adapter
-        ListAdapter myAdapter = new ListAdapter(pokemonList);
+        myAdapter = new ListAdapter(pokemonList);
         recyclerView.setAdapter(myAdapter);
     }
 
