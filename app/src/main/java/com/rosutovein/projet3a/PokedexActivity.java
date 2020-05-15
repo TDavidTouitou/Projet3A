@@ -27,7 +27,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.ActionBar;
@@ -57,7 +56,7 @@ public class PokedexActivity extends AppCompatActivity{
         setContentView(R.layout.activity_pokedex);
 
         //Ajouter la toolbar sur l'activité
-        Toolbar pokedexToolbar = findViewById(R.id.toolbar);
+        Toolbar pokedexToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(pokedexToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -115,9 +114,12 @@ public class PokedexActivity extends AppCompatActivity{
 
     private boolean haveInternetConnection(){
 
-        NetworkInfo network = ((ConnectivityManager) Objects.requireNonNull(getSystemService(Context.CONNECTIVITY_SERVICE))).getActiveNetworkInfo();
+        NetworkInfo network = ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
 
-        return network != null && network.isConnected();
+        if(network == null || !network.isConnected()) {
+            return false;
+        }
+        return true;
     }
 
     //Permet de charger les données depuis le cache
@@ -133,7 +135,7 @@ public class PokedexActivity extends AppCompatActivity{
             return gson.fromJson(jsonPokemon,listType);
         }
     }
-     //
+
 
 
 
@@ -141,7 +143,7 @@ public class PokedexActivity extends AppCompatActivity{
     private void showList(List<Pokemon> pokemonList){
 
         //On récupère la recycleView du fichier activity_main
-        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         //Option permettant d'améliorer les performances
         recyclerView.setHasFixedSize(true);
         //On choisit un disposition linéaire pour notre recycleView
