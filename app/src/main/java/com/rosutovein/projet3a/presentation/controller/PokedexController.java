@@ -10,11 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.rosutovein.projet3a.Constants;
+import com.rosutovein.projet3a.Singletons;
 import com.rosutovein.projet3a.R;
-import com.rosutovein.projet3a.data.PokeApi;
 import com.rosutovein.projet3a.presentation.model.Pokemon;
 import com.rosutovein.projet3a.presentation.model.RestPokemonResponse;
 import com.rosutovein.projet3a.presentation.view.PokedexActivity;
@@ -26,8 +25,6 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokedexController {
 
@@ -92,18 +89,7 @@ public class PokedexController {
     }
     private void makeApiCall(){
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        PokeApi pokeApi = retrofit.create(PokeApi.class);
-
-        Call<RestPokemonResponse> call = pokeApi.getPokemonResponse();
+       Call<RestPokemonResponse> call = Singletons.getPokeApi().getPokemonResponse();
 
         //On créer un callback qui va "diagnostiquer" la réponse du serveur.
         //On créer deux méthode, une en cas de réponse du serveur et ...

@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.rosutovein.projet3a.Constants;
 import com.rosutovein.projet3a.R;
+import com.rosutovein.projet3a.Singletons;
 import com.rosutovein.projet3a.data.PokeApi;
 import com.rosutovein.projet3a.presentation.controller.PokedexController;
 import com.rosutovein.projet3a.presentation.model.Pokemon;
@@ -62,12 +63,9 @@ public class PokedexActivity extends AppCompatActivity{
 
         //Instanciation du controller
         controller = new PokedexController(
-             this,
-            //Créer un objet qui permet de garder en mémoire les données (utiles pour ne pas avoir une application vide par manque de connexion)
-            new GsonBuilder()
-                    .setLenient()
-                    .create(),
-            getSharedPreferences(Constants.APPLICATION_NAME, Context.MODE_PRIVATE)
+           this,
+            Singletons.getGson(),
+            Singletons.getSharedPreferencesInstance(getApplicationContext())
         );
         controller.onStart();
     }
