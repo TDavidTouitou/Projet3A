@@ -1,4 +1,4 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

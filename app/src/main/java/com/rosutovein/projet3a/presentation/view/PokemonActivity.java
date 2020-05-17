@@ -1,21 +1,18 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.view;
 import android.content.Intent;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.gson.GsonBuilder;
+import com.rosutovein.projet3a.R;
+import com.rosutovein.projet3a.presentation.model.Pokemon;
 import com.squareup.picasso.Picasso;
 
 public class PokemonActivity extends AppCompatActivity {

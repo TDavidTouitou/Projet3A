@@ -1,8 +1,5 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.view;
 import android.content.Intent;
-import android.content.Intent;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +7,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.os.Bundle;
 
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.rosutovein.projet3a.R;
+import com.rosutovein.projet3a.presentation.model.Pokemon;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -83,7 +79,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    ListAdapter(List<Pokemon> pokemonList) {
+    public ListAdapter(List<Pokemon> pokemonList) {
 
         this.pokemonList = pokemonList;
         pokemonListFull = new ArrayList<>(pokemonList);

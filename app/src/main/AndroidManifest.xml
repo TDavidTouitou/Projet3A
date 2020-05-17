@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:name=".MyApp">
 
-        <activity android:name=".SplashActivity" android:parentActivityName=".MainActivity" android:theme="@style/SplashTheme">
+        <activity android:name=".presentation.view.SplashActivity" android:parentActivityName=".presentation.view.MainActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,17 +23,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" android:parentActivityName=".MainActivity" android:label="@string/app_name">
+        <activity android:name=".presentation.view.MainActivity" android:parentActivityName=".presentation.view.MainActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:name=".PokedexActivity" android:parentActivityName=".MainActivity" android:label="Pokedex"/>
-        <activity android:name=".ToolbarActivity"/>
-        <activity android:name=".PokemonActivity" android:parentActivityName=".PokedexActivity" android:label="Pokemon"/>
-        <activity android:name=".AboutActivity" android:parentActivityName=".MainActivity" android:label="About me"/>
+        <activity android:name=".presentation.view.PokedexActivity" android:parentActivityName=".presentation.view.MainActivity" android:label="Pokedex"/>
+        <activity android:name=".presentation.view.ToolbarActivity"/>
+        <activity android:name=".presentation.view.PokemonActivity" android:parentActivityName=".presentation.view.PokedexActivity" android:label="Pokemon"/>
+        <activity android:name=".presentation.view.AboutActivity" android:parentActivityName=".presentation.view.MainActivity" android:label="About me"/>
 
         <meta-data
             android:name="preloaded_fonts"

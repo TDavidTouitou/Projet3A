@@ -1,4 +1,4 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.model;
 
 import java.util.List;
 

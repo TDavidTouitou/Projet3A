@@ -1,10 +1,12 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.view;
 
 import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.rosutovein.projet3a.R;
 
 public class ToolbarActivity extends AppCompatActivity {
 

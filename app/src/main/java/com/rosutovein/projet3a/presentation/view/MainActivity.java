@@ -1,12 +1,10 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.rosutovein.projet3a.R;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,10 +1,9 @@
-package com.rosutovein.projet3a;
+package com.rosutovein.projet3a.data;
 
-import java.util.List;
+import com.rosutovein.projet3a.presentation.model.RestPokemonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public interface PokeApi {
 
