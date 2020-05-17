@@ -17,4 +17,6 @@
     <string name="ability">Ability</string>
     <string name="ability_description">Ability description</string>
     <string name="Hidden_Ability_Description">Hidden hability description</string>
+    <string name="notification_title">notification title</string>
+    <string name="default_notification_channel_id">channel ID</string>
 </resources>

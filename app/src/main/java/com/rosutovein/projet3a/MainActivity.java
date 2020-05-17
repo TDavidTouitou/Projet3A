@@ -3,6 +3,7 @@ package com.rosutovein.projet3a;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.appcompat.widget.Toolbar;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToPokedexActivity);
             }
         });
+
+        final ImageView pokeballImage = (ImageView) findViewById(R.id.pokeball_main_activity);
+        Button animatePokeballButton = (Button) findViewById(R.id.animation_pokeball_button);
+        animatePokeballButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.FlipInX)
+                        .duration(1000)
+                        .playOn(pokeballImage);
+            }
+        });
+
     }
 
     @Override
