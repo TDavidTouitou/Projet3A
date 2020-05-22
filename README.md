@@ -34,7 +34,8 @@ https://github.com/Rosutovein/Projet3A/blob/master/img_readme/SplashScreen.jpg
 * Accéder au pokedex
 * Partager le lien du projet Github ou l'ouvrir direcetement sur le navigateur par défaut
 * Animer l'image de la pokeball (une seule animation actuellement)
-https://raw.githubusercontent.com/Rosutovein/Projet3A/master/img_readme/HomeActivity.jpghttps://github.com/Rosutovein/Projet3A/blob/master/img_readme/Share.jpg
+![alt HomeActivity](https://raw.githubusercontent.com/Rosutovein/Projet3A/master/img_readme/HomeActivity.jpg)
+https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Share.jpg
 
 ### Ecran du pokedex
 * Afficher la liste des pokemon avec une barre de recherche
