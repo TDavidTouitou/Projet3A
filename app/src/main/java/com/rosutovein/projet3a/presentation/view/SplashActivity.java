@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.rosutovein.projet3a.presentation.view.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

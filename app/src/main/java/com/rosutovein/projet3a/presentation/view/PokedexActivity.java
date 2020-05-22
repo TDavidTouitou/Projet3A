@@ -1,51 +1,30 @@
 package com.rosutovein.projet3a.presentation.view;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.rosutovein.projet3a.Constants;
 import com.rosutovein.projet3a.R;
 import com.rosutovein.projet3a.Singletons;
-import com.rosutovein.projet3a.data.PokeApi;
 import com.rosutovein.projet3a.presentation.controller.PokedexController;
 import com.rosutovein.projet3a.presentation.model.Pokemon;
-import com.rosutovein.projet3a.presentation.model.RestPokemonResponse;
 
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokedexActivity extends AppCompatActivity{
 
     private ListAdapter myAdapter;
-    private PokedexController controller;
-
 
 
     @Override
@@ -62,10 +41,10 @@ public class PokedexActivity extends AppCompatActivity{
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Instanciation du controller
-        controller = new PokedexController(
-           this,
-            Singletons.getGson(),
-            Singletons.getSharedPreferencesInstance(getApplicationContext())
+        PokedexController controller = new PokedexController(
+                this,
+                Singletons.getGson(),
+                Singletons.getSharedPreferencesInstance(getApplicationContext())
         );
         controller.onStart();
     }
