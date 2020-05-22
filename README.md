@@ -11,12 +11,14 @@ Cette application affiche le pokedex des quatres première génération de Pokem
 ## Prérequis
 * Installation du logiciel Android Studio (disponible sur Mac, Linux et Windows)
 * Récupérer le programme grâce au lien Github suivant:
+```
 https://github.com/Rosutovein/Projet3A.git
+```
 
 ## Consignes respectées:
 * Ecran avec une liste d'éléments (de Pokemon)
 * Ecran avec le détail d'un élément (types, statistiques, etc.)
-* Appel WebService à une API Rest (https://github.com/Rosutovein/Projet3A/blob/master/pokedex.json)
+* Appel WebService à une API Rest (```https://github.com/Rosutovein/Projet3A/blob/master/pokedex.json```)
 * Stockage de données en cache
 * Fonctions supplémentaires:
   * Barre de recherche pour trouver un Pokemon en particulier
@@ -28,24 +30,24 @@ https://github.com/Rosutovein/Projet3A.git
 
 ### Première écran
 * Splash Screen au démarage de l'application
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/SplashScreen.jpg
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/SplashScreen.jpg" width="360" height="640" />
 
 ### Ecran Home
 * Accéder au pokedex
 * Partager le lien du projet Github ou l'ouvrir direcetement sur le navigateur par défaut
 * Animer l'image de la pokeball (une seule animation actuellement)
-![alt HomeActivity](https://raw.githubusercontent.com/Rosutovein/Projet3A/master/img_readme/HomeActivity.jpg)
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Share.jpg
+<img src="https://raw.githubusercontent.com/Rosutovein/Projet3A/master/img_readme/HomeActivity.jpg" width="360" height="640" />
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Share.jpg" width="360" height="640" />
 
 ### Ecran du pokedex
 * Afficher la liste des pokemon avec une barre de recherche
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/PokedexActivity.jpg
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Search.jpg
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/PokedexActivity.jpg" width="360" height="640" />
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Search.jpg" width="360" height="640" />
 
 ### Ecran du pokemon
 * Affiche les détails du pokemon sélectionné dans le pokedex
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/PokemonActivity.jpg
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/PokemonActivity.jpg" width="360" height="640" />
 
 ### Notification push
 * Exemple de notification (Firebase)
-https://github.com/Rosutovein/Projet3A/blob/master/img_readme/NotifiationFirebase.jpg
+<img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/NotifiationFirebase.jpg" width="360" height="640" />
