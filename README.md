@@ -24,7 +24,7 @@ https://github.com/Rosutovein/Projet3A.git
   * Barre de recherche pour trouver un Pokemon en particulier
   * Splash screen au démarrage de l'application
   * Ajout d'un boutton share pour partager le dépôt Github de l'application
-  * Notificcation Push (Firebase)
+  * Notification Push (Firebase)
 
 ## Fonctionalités:
 
