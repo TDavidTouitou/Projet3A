@@ -41,6 +41,7 @@ https://github.com/Rosutovein/Projet3A.git
 
 ### Ecran du pokedex
 * Afficher la liste des pokemon avec une barre de recherche
+* Possibilité de raffraichir la liste avec un glissement vers le bas (swipe refresh)
 <img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/PokedexActivity.jpg" width="360" height="640" />
 <img src="https://github.com/Rosutovein/Projet3A/blob/master/img_readme/Search.jpg" width="360" height="640" />
 
